@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='Images/LOGO.png') }}" type="image/x-icon">
+    <title>SmartWater | Terms of Service</title>
+    <!-- BOXICONS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- STYLE -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-pp.css') }}">
+</head>
+<body>
+    <!--- Navigation Bar (Header) -->
+    <nav>
+        <div class="nav-header">
+            <div class="nav-logo">
+                <a href="/"><img src="{{ url_for('static', filename='Images/LOGO.png') }}"><span>SmartWater</span></a>
+            </div>
+            <div class="nav-menuBtn" id="menu-btn">
+                <i class="bx bx-menu"></i>
+            </div>
+        </div>
+        <ul class="navlinks" id="nav-links">
+            <li><a href="/AboutUsMain">About Us</a></li>
+            <li><a href="/privacy_policy">Privacy</a></li>
+
+        </ul>
+        <div class="nav-icons">
+            <i class="bx bx-droplet"></i>
+            <i class="bx bx-wind"></i>
+        </div>
+    </nav>
+    
+
+
+<!-- Banner -->
+<div class="col-col-1">
+    <section class="banner">
+        <div class="banner-content"> <!-- New container for styling -->
+            <h1>Terms and Conditions</h1>
+                <h2>Effective Date: November 26,2024</h2>
+                <p>Welcome to Smart Water! By using our web application, you agree to comply with these Terms and Conditions. Please read them carefully to understand your rights and responsibilities.</p>
+                <h2>1. Overview</h2>
+                <h3>Smart Water is a web-based application designed to provide users with:</h3>
+                <p>• Real-time weather conditions and forecasts using OpenWeather API.</p>
+                <p>• A map powered by MapBox API that highlights optimal locations in Bacoor for fog nets and rainwater harvesting.</p>
+                <p>• Predictions of fog likelihood and calculations of potential liters of water harvestable based on weather forecasts.</p>
+                <hr>
+                <h2>2. User Accounts</h2>
+                <h3>Account Registration: To access the application, you must create an account by providing:</h3>
+                <p>• A valid email address</p>
+                <p>• A unique username</p>
+                <p>• A secure password</p>
+                <h3>Account Security: You are responsible for maintaining the confidentiality of your login credentials. Smart Water is not liable for unauthorized access resulting from your failure to safeguard your credentials.</h3>
+                <hr>
+                <h2>3. Data Collection and Use</h2>
+                <h3>Personal Information: We collect your email, username, and password for account registration and login purposes.</h3>
+                <h3>Third-Party APIs:</h3>
+                <p>• Weather data is sourced from OpenWeather API.</p>
+                <p>• Map data is provided by MapBox API.</p>
+                <h3>Purpose of Data Collection: Your data is used solely to provide a personalized experience and ensure functionality of the application.</h3>
+                <hr>
+                <h2>4. User Responsibilities</h2>
+                <h3>By using Smart Water, you agree to:</h3>
+                <p>• Provide accurate and complete registration information.</p>
+                <p>• Use the application in compliance with all applicable laws and regulations.</p>
+                <p>• Avoid unauthorized access to or misuse of our services.</p>
+                <hr>
+                <h2>5. Intellectual Property</h2>
+                <p>• All content, features, and functionalities of Smart Water (including but not limited to software, maps, models, and designs) are the property of Smart Water or its licensors.</p>
+                <p>• Users are prohibited from reproducing, distributing, or modifying any part of the application without prior written consent.</p>
+                <hr>
+                <h2>6. Limitaion of Liability</h2>
+                <p>• we strive to ensure accurate and up-to-date data, Smart Water does not guarantee the precision of weather predictions, fog likelihood forecasts, or water harvesting calculations.</p>
+                <p>• We are not liable for any decisions made based on the information provided by the application.</p>
+                <hr>
+                <h2>7. Third-Party Services</h2>
+                <p>Smart Water integrates with third-party APIs, including OpenWeather and MapBox. By using our service, you agree to their respective terms of service and privacy policies.</p>
+                <hr>
+                <h2>8. Amendments to Terms</h2>
+                <p>Smart Water reserves the right to update these Terms and Conditions at any time. Any changes will be communicated to users via the application or email.</p>
+                <hr>
+                <h2>9. Contact Information</h2>
+                <p>For questions or concerns about these Terms and Conditions, please contact us at SmartWater@support.com.</p>
+            </div>
+    </section>
+</div>
+
+    <section class= "footer">
+        <div class="waves">
+            <div class="wave" id="wave-1"></div>
+            <div class="wave" id="wave-2"></div>
+            <div class="wave" id="wave-3"></div>
+            <div class="wave" id="wave-4"></div>
+        </div>
+        <div class="footer-content">
+            <div class="logo-heading">
+                <img src="{{ url_for('static', filename='Images/LOGO.png') }}" alt="Smart-Logo">
+                <h2>SmartWater</h2>
+            </div>
+            <p>Smart Water is a capstone project developed as part of the Computer Science program, integrating machine learning and environmental sustainability to optimize fog and rainwater harvesting in Bacoor, Cavite.</p>
+        </div>
+        <div class="footer-content">
+            <h4>Contact Us</h4>
+            <li>rc202300000@gmail.com</li>
+            <li>GAM1029@dlsud.edu.ph</li>
+            <li>sotong.miracle@gmail.com</li>
+        </div>
+        <div class="footer-content">
+            <h4>Follow Us</h4>
+            <li><a href="https://github.com/fame2332">Richmond Constante</a></li>
+            <li><a href="https://github.com/ARANNNFPS">Aries Garibay</a></li>
+            <li><a href="https://github.com/AeinSo">Lauren Sotong</a></li>
+        </div>
+        <div class="footer-content">
+            <h4>Legal Information</h4>
+            <li><a href="/privacy_policy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+        </div>
+        <div class="footer-content">
+            <h4>Credits</h4>
+            <li><a href="https://openweathermap.org/api"><i>API by Open Weather Map</i></a></li>
+            <li><a href="https://www.visualcrossing.com/weather/weather-data-services"><i>Weather Data powered by Visual Crossing</i></a></li>
+            <li><a href="https://www.pagasa.dost.gov.ph/"><i>Topographical Data provided by PAGASA</i></a></li>
+        </div>
+    </section>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="{{ url_for('static', filename='js/main-lp.js') }}"></script>
+</body>
+</html>
