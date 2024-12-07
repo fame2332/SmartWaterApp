@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.12.1/mapbox-gl.css">
+    <link rel="icon" href="{{ url_for('static', filename='Images/LOGO.png') }} " type="image/x-icon">
+    <title>SmartWater | Dashboard</title>
+    <!-- BOXICONS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- STYLE -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-db_graph.css') }}">
+</head>
+<body>
+  <div class="dashboard">
+      <div>
+          <nav class="menu">
+        <img src="{{ url_for('static', filename='Images/LOGO.png') }}" class="logo" alt="SmartWater Logo">
+        <p class="menu-title">SmartWater</p>
+        <ul class="menu-items">
+            <li><a href="/index_graph" class="menu-link"><i class='bx bx-refresh'></i></a></li>
+            <li><a href="/index_table" class="menu-link"><i class='bx bx-table'></i></a></li>
+            <li><a href="/index" class="menu-link"><i class='bx bx-home'></i></a></li>
+        </ul>
+        <ul class="menu-bottom">
+
+            <li><a href="#" class="menu-link" id="bell-icon"><i class='bx bx-bell'></i>
+                <span class="badge"></span>
+            </a></li>
+            <li><a href="/AboutUsIn" class="menu-link"><i class='bx bx-info-circle'></i></a></li>
+            <li><a href="/logout" class="menu-link"><i class='bx bx-log-out'></i></a></li>
+        </ul>
+    </nav>
+      </div>
+
+<div>
+          <!-- Graphs Section -->
+    <div class="graphs-container">
+        <h1>Weather Data Visualization</h1>
+
+        <div class="graph">
+            <h2>Dew Point, Temperature, Feels Like, and Humidity</h2>
+            <canvas id="chart1"></canvas>
+        </div>
+
+        <div class="graph">
+            <h2>Rainwater and Fog Likelihood</h2>
+            <canvas id="chart2"></canvas>
+        </div>
+
+        <div class="graph">
+            <h2>Wind Speed Over 5 Days</h2>
+            <canvas id="chart3"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     <script>
+        // Fetch the data from the Flask route
+        fetch('/forecast')
+            .then(response => response.json())
+            .then(data => {
+                // Extract the chart data from the response
+                const chart1 = data.chart1;
+                const chart2 = data.chart2;
+                const chart3 = data.chart3;
+
+                // --- Chart 1: Temperature, Dew Point, Feels Like, and Humidity ---
+                new Chart("chart1", {
+                    type: "line",
+                    data: {
+                        labels: chart1.labels,
+                        datasets: [
+                            {
+                                label: "Temperature (°C)",
+                                data: chart1.datasets.temperature,
+                                borderColor: "red",
+                                fill: false,
+                                borderWidth: 2
+                            },
+                            {
+                                label: "Dew Point (°C)",
+                                data: chart1.datasets.dewPoint,
+                                borderColor: "green",
+                                fill: false,
+                                borderWidth: 2
+                            },
+                            {
+                                label: "Feels Like (°C)",
+                                data: chart1.datasets.feelsLike,
+                                borderColor: "blue",
+                                fill: false,
+                                borderWidth: 2
+                            },
+                            {
+                                label: "Humidity (%)",
+                                data: chart1.datasets.humidity,
+                                borderColor: "purple",
+                                fill: false,
+                                borderWidth: 2
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: "Weather Metrics Over Time",
+                                font: { size: 20 }
+                            },
+                            legend: {
+                                display: true,
+                                labels: { font: { size: 16 } }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: "Time of Day",
+                                    font: { size: 18 }
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: "Values",
+                                    font: { size: 18 }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // --- Chart 2: Potential Liters and Fog Likelihood ---
+                new Chart("chart2", {
+                    type: "bar",
+                    data: {
+                        labels: chart2.labels,
+                        datasets: [
+                            {
+                                label: "Potential Liters (L)",
+                                type: "bar",
+                                data: chart2.datasets.rainLiters,
+                                backgroundColor: "rgba(54, 162, 235, 0.8)",
+                                borderColor: "rgba(54, 162, 235, 1)",
+                                borderWidth: 1
+                            },
+                            {
+                                label: "Fog Likelihood (%)",
+                                type: "line",
+                                data: chart2.datasets.fogLikelihood,
+                                borderColor: "rgba(255, 99, 132, 1)",
+                                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                                fill: false,
+                                borderWidth: 2
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: "Rainfall and Fog Likelihood Over 5 Days",
+                                font: { size: 20 }
+                            },
+                            legend: {
+                                display: true,
+                                labels: { font: { size: 16 } }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: "Time (3-Hour Intervals)",
+                                    font: { size: 18 }
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: "Rain Liters (mm) and Fog Likelihood (%)",
+                                    font: { size: 18 }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // --- Chart 3: Wind Speed ---
+                new Chart("chart3", {
+                    type: "line",
+                    data: {
+                        labels: chart3.labels,
+                        datasets: [
+                            {
+                                label: "Wind Speed (m/s)",
+                                data: chart3.datasets.windSpeed,
+                                borderColor: "rgba(0, 0, 255, 1.0)",
+                                backgroundColor: "rgba(0, 0, 255, 0.2)",
+                                borderWidth: 2,
+                                fill: true
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: "Wind Speed Over 5 Days (3-Hour Intervals)",
+                                font: { size: 20 }
+                            },
+                            legend: {
+                                display: true,
+                                labels: { font: { size: 16 } }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: "Time (3-Hour Intervals)",
+                                    font: { size: 18 }
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: "Wind Speed (m/s)",
+                                    font: { size: 18 }
+                                },
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(err => {
+                console.error("Error fetching forecast data:", err);
+            });
+    </script>
+
+<div id="notificationModal" class="modal">
+    <div class="modal-content">
+        <span id="closeModal" class="close-btn">&times;</span>
+
+        <div class="alert-message rain-alert" style="display:none;">
+            <strong>Alert:</strong> Rain detected later. Please set up the rainwater collection system.
+        </div>
+
+        <div class="alert-message fog-alert" style="display:none;">
+            <strong>Alert:</strong> There is a chance of fog later. Please set up the fog net.
+        </div>
+
+        <!-- New message for "no alert" -->
+        <div class="alert-message no-alert-message" style="display:none;">
+            <strong>No Alert:</strong> There is no alert at the moment.
+        </div>
+    </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='js/main-db.js') }}"></script>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.12.1/mapbox-gl.js'></script>
+<script>
+    // JavaScript for modal functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the modal and bell icon elements
+    var modal = document.getElementById("notificationModal");
+    var bellIcon = document.querySelector(".menu-bottom .bx-bell");
+    var closeBtn = document.getElementById("closeModal");
+
+    // When the user clicks on the bell icon, open the modal
+    bellIcon.addEventListener("click", function() {
+        modal.style.display = "block";
+    });
+
+    // When the user clicks on the close button, close the modal
+    closeBtn.addEventListener("click", function() {
+        modal.style.display = "none";
+    });
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.addEventListener("click", function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    });
+});
+mapboxgl.accessToken = 'pk.eyJ1IjoiZmFtZTIzMzIiLCJhIjoiY20yeThteTFzMGR2NTJpcTAxcjZpNDU2MiJ9.w3yolR0g9XgeTY5ek1sNBg';
+const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [120.9737, 14.4130],
+    zoom: 11
+});
+
+map.on('load', function () {
+
+    // Add first overlay (existing)
+    map.addSource('overlay1', {
+        'type': 'geojson',
+        'data': '/static/geojson/export (1).geojson'
+    });
+
+    map.addLayer({
+        'id': 'overlay1-layer',
+        'type': 'fill',
+        'source': 'overlay1',
+        'layout': {},
+        'paint': {
+            'fill-color': '#ff0000', // Red color for the first overlay
+            'fill-opacity': 0.2
+        }
+    });
+
+    // Add fog net locations (existing)
+    map.addSource('overlay2', {
+        'type': 'geojson',
+        'data': '/static/geojson/fognet_locations.geojson'
+    });
+
+    map.addLayer({
+        'id': 'overlay2-layer',
+        'type': 'circle',  // Use 'circle' for points (pins)
+        'source': 'overlay2',
+        'paint': {
+            'circle-color': '#00ff00',  // Green color for fog net locations
+            'circle-radius': 8,  // Size of the circle
+            'circle-opacity': 0.7
+        }
+    });
+
+    // Add popups for fog net locations
+    map.on('click', 'overlay2-layer', function (e) {
+        var coordinates = e.lngLat;
+        var properties = e.features[0].properties;
+
+        new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML('<strong>' + properties.name + '</strong><br>' +
+                     'Elevation: ' + properties.elevation + ' meters')
+            .addTo(map);
+    });
+
+    // Change cursor to pointer when hovering over fog net location
+    map.on('mouseenter', 'overlay2-layer', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    map.on('mouseleave', 'overlay2-layer', function () {
+        map.getCanvas().style.cursor = '';
+    });
+
+    // Add rainwater collection sites (new)
+    map.addSource('rainwater-sites', {
+        'type': 'geojson',
+        'data': '/static/geojson/rainwater_collection_sites.geojson'  // Path to the GeoJSON
+    });
+
+    // Add layer for rainwater collection sites with color coding
+    map.addLayer({
+        'id': 'rainwater-layer',
+        'type': 'circle',
+        'source': 'rainwater-sites',
+        'paint': {
+            'circle-color': [
+                'case',
+                ['>=', ['get', 'elevation'], 5], '#0000FF',  // Blue for suitable (elevation >= 5 meters)
+                '#FF0000'  // Red for unsuitable (below 5 meters)
+            ],
+            'circle-radius': 8,
+            'circle-opacity': 0.7
+        }
+    });
+
+    // Add popups for rainwater collection sites
+    map.on('click', 'rainwater-layer', function (e) {
+        var coordinates = e.lngLat;
+        var properties = e.features[0].properties;
+
+        new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML('<strong>' + properties.name + '</strong><br>' +
+                     'Elevation: ' + properties.elevation + ' meters')
+            .addTo(map);
+    });
+
+    // Change cursor to pointer when hovering over rainwater collection site
+    map.on('mouseenter', 'rainwater-layer', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    map.on('mouseleave', 'rainwater-layer', function () {
+        map.getCanvas().style.cursor = '';
+    });
+
+});
+
+</script>
+
+
+</body>
+</html>
