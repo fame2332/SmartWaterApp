@@ -1,0 +1,1 @@
+{"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [120.9806, 14.3711]}, "properties": {"name": "Molino IV", "elevation": 60.6}}, {"type": "Feature", "geometry": {"type": "Point", "coordinates": [120.9939, 14.3958]}, "properties": {"name": "Queens Row East, Bacoor", "elevation": 49.3}}]}

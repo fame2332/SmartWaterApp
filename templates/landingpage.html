@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='Images/LOGO.png') }}" type="image/x-icon">
+    <title>SmartWater | Get Started</title>
+    <!-- BOXICONS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- STYLE -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-lp.css') }}">
+</head>
+<body>
+    <!--- Navigation Bar (Header) -->
+    <nav>
+        <div class="nav-header">
+            <div class="nav-logo">
+                <a href="#"><img src="{{ url_for('static', filename='Images/LOGO.png') }}"><span>SmartWater</span></a>
+            </div>
+            <div class="nav-menuBtn" id="menu-btn">
+                <i class="bx bx-menu"></i>
+            </div>
+        </div>
+        <ul class="navlinks" id="nav-links">
+            <li><a href="/login">Login</a></li>
+            <li><a href="/AboutUsMain">About Us</a></li>
+        </ul>
+        <div class="nav-icons">
+            <i class="bx bx-droplet"></i>
+            <i class="bx bx-wind"></i>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="container-left">
+            <h1>Optimize Water, Sustain Life</h1>
+            <div class="container-btn">
+                <button class="btn"><a href="/login">Get Started</a></button>
+            </div>
+        </div>
+        <div class="container-right">
+            <div class="images">
+                <img src="{{ url_for('static', filename='Images/rain.gif') }}" alt="rain" class="rain-1"/>
+                <img src="{{ url_for('static', filename='Images/technology.gif') }}" alt="technology" class="technology"/>
+            </div>
+            <div class="content">
+                <h4>Harness Bacoor’s Natural Resources with Smart Water</h4>
+                <h2>SmartWater</h2>
+                <h3>Optimizing Water Harvesting with Forecast-Driven Precision</h3>
+                <p>
+                    Smart Water uses cutting-edge machine learning and weather data to optimize rain and fog water harvesting in Bacoor. Gain insights, track trends, and make informed decisions to conserve water more efficiently.
+                </p>
+            </div>
+        </div>
+        <div class="location">
+            <span><i class="bx bx-map"></i></span>
+            BACOOR
+        </div>
+    </div>
+    <section class= "footer">
+        <div class="waves">
+            <div class="wave" id="wave-1"></div>
+            <div class="wave" id="wave-2"></div>
+            <div class="wave" id="wave-3"></div>
+            <div class="wave" id="wave-4"></div>
+        </div>
+        <div class="footer-content">
+            <div class="logo-heading">
+                <img src="{{ url_for('static', filename='Images/LOGO.png') }}" alt="Smart-Logo">
+                <h2>SmartWater</h2>
+            </div>
+            <p>Smart Water is a capstone project developed as part of the Computer Science program, integrating machine learning and environmental sustainability to optimize fog and rainwater harvesting in Bacoor, Cavite.</p>
+        </div>
+        <div class="footer-content">
+            <h4>Contact Us</h4>
+            <li>rc202300000@gmail.com</li>
+            <li>GAM1029@dlsud.edu.ph</li>
+            <li>sotong.miracle@gmail.com</li>
+        </div>
+        <div class="footer-content">
+            <h4>Follow Us</h4>
+            <li><a href="https://github.com/fame2332">Richmond Constante</a></li>
+            <li><a href="https://github.com/ARANNNFPS">Aries Garibay</a></li>
+            <li><a href="https://github.com/AeinSo">Lauren Sotong</a></li>
+        </div>
+        <div class="footer-content">
+            <h4>Legal Information</h4>
+            <li><a href="/privacy_policy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+        </div>
+        <div class="footer-content">
+            <h4>Credits</h4>
+            <li><a href="https://openweathermap.org/api"><i>API by Open Weather Map</i></a></li>
+            <li><a href="https://www.visualcrossing.com/weather/weather-data-services"><i>Weather Data powered by Visual Crossing</i></a></li>
+            <li><a href="https://www.philatlas.com/luzon/r04a/cavite/bacoor.html"><i>Topographical Data provided by PhilAtlas</i></a></li>
+        </div>
+    </section>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="/assets/js/main-lp.js"></script>
+</body>
+</html>

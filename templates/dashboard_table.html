@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.12.1/mapbox-gl.css">
+  <link rel="icon" href="{{ url_for('static', filename='Images/LOGO.png') }} " type="image/x-icon">
+  <title>SmartWater | Dashboard</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style-db_graph.css') }}">
+  <style>
+  /* Improved table styles */
+  #forecast-table {
+    width: 100%;
+    background-color: white;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-left: 1rem;
+  }
+
+  #forecast-table th,
+  #forecast-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+
+  #forecast-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    color: #555;
+    text-transform: uppercase;
+  }
+
+  #forecast-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  #forecast-table tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+
+  #forecast-table tbody td {
+    vertical-align: middle;
+  }
+
+  /* Improved button styles */
+  .sort-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    gap: 10px;
+  }
+
+  .sort-buttons button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .sort-buttons button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+
+  .sort-buttons button:active {
+    background-color: #004080;
+    transform: translateY(0);
+  }
+
+  /* Title styles */
+  .table-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333; /* Adjust color as needed */
+  }
+</style>
+</head>
+
+<body>
+  <div class="dashboard">
+    <div>
+      <nav class="menu">
+        <img src="{{ url_for('static', filename='Images/LOGO.png') }}" class="logo" alt="SmartWater Logo">
+        <p class="menu-title">SmartWater</p>
+        <ul class="menu-items">
+          <li><a href="/index_graph" class="menu-link"><i class='bx bx-refresh'></i></a></li>
+         <li><a href="/index_graph" class="menu-link"><i class='bx bx-line-chart'></i></a></li>
+          <li><a href="/index" class="menu-link"><i class='bx bx-home'></i></a></li>
+          <li><a href="/download-weather-report" class="menu-link"><i class='bx bx-download'></i></a></li>
+          <li><a href="/download_csv" class="menu-link"><i class='bx bx-history'></i></a></li>
+
+        </ul>
+        <ul class="menu-bottom">
+          <li><a href="#" class="menu-link" id="bell-icon"><i class='bx bx-bell'></i>
+              <span class="badge"></span>
+            </a></li>
+            <li><a href="/AboutUsIn" class="menu-link"><i class='bx bx-info-circle'></i></a></li>
+          <li><a href="/logout" class="menu-link"><i class='bx bx-log-out'></i></a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div>
+      <div class="table-title">
+        5-Day Weather Forecast
+      </div>
+      <div class="sort-buttons">
+        <button onclick="sortTable('rainfall')">Sort by Harvest</button>
+        <button onclick="sortTable('fog')">Sort by Fog Likelihood</button>
+        <button onclick="sortTable('normal')">Normal</button>
+      </div>
+      <div id="forecast-table"></div>
+    </div>
+
+    <div id="notificationModal" class="modal">
+      <div class="modal-content">
+        <span id="closeModal" class="close-btn">&times;</span>
+        <div class="alert-message rain-alert" style="display:none;">
+          <strong>Alert:</strong> Rain detected later. Please set up the rainwater collection system.
+        </div>
+        <div class="alert-message fog-alert" style="display:none;">
+          <strong>Alert:</strong> There is a chance of fog later. Please set up the fog net.
+        </div>
+        <div class="alert-message no-alert-message" style="display:none;">
+          <strong>No Alert:</strong> There is no alert at the moment.
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/main-db.js') }}"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.12.1/mapbox-gl.js'></script>
+    <script>
+      // JavaScript for modal functionality
+      document.addEventListener('DOMContentLoaded', function () {
+        // Get the modal and bell icon elements
+        var modal = document.getElementById("notificationModal");
+        var bellIcon = document.querySelector(".menu-bottom .bx-bell");
+        var closeBtn = document.getElementById("closeModal");
+        // When the user clicks on the bell icon, open the modal
+        bellIcon.addEventListener("click", function () {
+          modal.style.display = "block";
+        });
+        // When the user clicks on the close button, close the modal
+        closeBtn.addEventListener("click", function () {
+          modal.style.display = "none";
+        });
+        // When the user clicks anywhere outside of the modal, close it
+        window.addEventListener("click", function (event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        });
+      });
+    </script>
+ <script>
+async function fetchWeatherData() {
+    const response = await fetch('/table_data');
+    if (!response.ok) {
+        console.error("Failed to fetch weather data");
+        return [];
+    }
+    return await response.json();
+}
+
+let originalData = [];
+let sortedAscending = {
+    rainfall: false,
+    fog: false
+};
+
+// Populate the table with fetched data
+async function populateWeatherTable() {
+    originalData = await fetchWeatherData();
+    updateTable(originalData);
+}
+
+// Update table content dynamically
+function updateTable(data) {
+    const tableHTML = createTable(data);
+    document.getElementById('forecast-table').innerHTML = tableHTML;
+}
+
+// Create table HTML structure
+function createTable(data) {
+    let tableHTML = `
+        <thead>
+            <tr>
+                <th>Date</th><th>Time</th><th>Temperature (°C)</th><th>Feels Like (°C)</th>
+                <th>Humidity (%)</th><th>Rain (mm/3hr)</th><th>Rain (mm/1hr)</th>
+                <th>Wind Speed (m/s)</th><th>Dew Point (°C)</th><th>Pressure (hPa)</th><th>Visibility (km)</th>
+                <th>Cloud Cover (%)</th><th>Rainfall (liters)</th>
+                <th>Fog Likelihood (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+    `;
+
+    for (const forecast of data) {
+        tableHTML += `
+            <tr>
+                <td>${forecast.date}</td>
+                <td>${forecast.time}</td>
+                <td>${forecast.temperature}</td>
+                <td>${forecast.feelsLike}</td>
+                <td>${forecast.humidity}</td>
+                <td>${forecast.rain3hr}</td>
+                <td>${forecast.rain1hr}</td>
+                <td>${forecast.windSpeed}</td>
+                <td>${forecast.dewPoint}</td>
+                <td>${forecast.pressure}</td>
+                <td>${forecast.visibility}</td>
+                <td>${forecast.cloudCover}</td>
+                <td>${forecast.rainfall}</td>
+                <td>${forecast.fogLikelihood}</td>
+            </tr>
+        `;
+    }
+
+    tableHTML += '</tbody>';
+    return `<table>${tableHTML}</table>`;
+}
+
+// Divide and Conquer: Merge Sort algorithm
+function mergeSort(arr, key, ascending = true) {
+    if (arr.length <= 1) return arr;
+
+    const mid = Math.floor(arr.length / 2);
+    const left = mergeSort(arr.slice(0, mid), key, ascending);
+    const right = mergeSort(arr.slice(mid), key, ascending);
+
+    return merge(left, right, key, ascending);
+}
+
+function merge(left, right, key, ascending) {
+    const result = [];
+    while (left.length && right.length) {
+        const condition = ascending
+            ? left[0][key] <= right[0][key]
+            : left[0][key] > right[0][key];
+
+        if (condition) {
+            result.push(left.shift());
+        } else {
+            result.push(right.shift());
+        }
+    }
+    return [...result, ...left, ...right];
+}
+
+// Handle table sorting
+function sortTable(type) {
+    console.log("Sorting type:", type); // Debug log
+    let key = '';
+    switch (type) {
+        case 'rainfall':
+            key = 'rainfall';
+            sortedAscending.rainfall = !sortedAscending.rainfall;
+            console.log("Sorting by rainfall, ascending:", sortedAscending.rainfall); // Debug log
+            updateTable(mergeSort([...originalData], key, sortedAscending.rainfall));
+            break;
+        case 'fog':
+            key = 'fogLikelihood';
+            sortedAscending.fog = !sortedAscending.fog;
+            console.log("Sorting by fogLikelihood, ascending:", sortedAscending.fog); // Debug log
+            updateTable(mergeSort([...originalData], key, sortedAscending.fog));
+            break;
+        case 'normal':
+            console.log("Restoring original order"); // Debug log
+            updateTable(originalData);
+            break;
+    }
+}
+
+// Populate the table on page load
+populateWeatherTable();
+</script>
+</body>
+
+</html>

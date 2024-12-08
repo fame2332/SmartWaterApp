@@ -1,0 +1,1048 @@
+/* POPPINS FONT */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root{
+    --primary-color: #8ED6EA;
+    --text-dark: #1A2B44;
+    --white: #FFFFFF;
+    --max-width: 1200px;
+}
+
+/* === BASE === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* === BODY === */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('../Images/BG.jpg'); /* Replace with your actual image path */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 0 20px;
+}
+
+.dashboard {
+    width: 100%;
+    height: 100vh; /* Adjust as needed */
+    margin: auto;
+    display: grid;
+    grid-template-areas:
+        "menu info info rain rain fog fog wind"
+        "menu info info rain rain fog fog  wind"
+        "menu info  info map map map map dewpoint"
+        "menu forecast forecast map map map map dewpoint"
+        "menu forecast forecast map map map map humidity"
+        "menu forecast forecast map map map map humidity"
+        "menu forecast forecast harvested harvested chart chart chart" 
+        "menu forecast forecast harvested harvested chart chart chart"
+        "menu forecast forecast harvested harvested chart chart chart"
+        "menu forecast forecast harvested harvested chart chart chart";
+    grid-template-columns: 80px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 100px 2fr 2fr 5fr 5fr 5fr 5fr 1fr 2fr;
+    gap: 20px;
+    /*background: rgba(255, 255, 255, 0.8);*/
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.info, .rainfall, .fog, .wind, .forecast, .map, .dewpoint, .humidity, .harvested, .chart, .total-harvest{
+    /*background: rgba(227, 242, 253, 0.8);*/
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    backdrop-filter: blur(20px);
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    height: auto;
+}
+
+/*
+.dashboard {
+  display: grid;
+  grid-template-areas:
+    "menu info info rain fog wind"
+    "menu forecast map map dewpoint humidity"
+    "menu harvested harvested chart chart chart";
+  grid-template-columns: 80px 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 80px 1fr 1fr;
+  gap: 10px;
+  /*background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 20px;
+  /*box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  height: 90%;
+}*/
+
+.menu {
+  grid-area: menu;
+  width: 80px;
+  height: auto;
+  /*background: rgba(227, 242, 253, 0.8);*/
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+}
+.menu .logo {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+  box-shadow:  20px 20px 60px #bebebe,
+             -20px -20px 60px #ffffff;
+}
+.menu-title {
+  margin-bottom: 20px;
+  font-size: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+.menu-items {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.menu-bottom {
+    list-style: none;
+    padding: 0;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.menu-link{
+    color: #00022e;
+    text-decoration: none;
+    font-size: 35px;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: all 0.3 ease;
+}
+.menu-link:hover {
+    color: var(--white);
+    transform: scale(1.1);
+}
+
+/* Badge styling */
+.badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 25px;
+    width: 12px;
+    height: 12px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 50%;
+    display: inline-block;
+    line-height: 16px; 
+}
+.menu-bottom a {
+    position: relative;
+}
+
+.info {
+  grid-area: info;
+  /*background: rgba(227, 242, 253, 0.8);*/
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
+  padding: 20px;
+  color: var(--text-dark);
+  display: flex;
+  min-height:250px;
+  flex-direction: column;
+  gap: 5px;
+}
+.info .location {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  background-color: var(--primary-color);
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--text-dark);
+  width: fit-content;
+  
+}
+.info .date {
+    text-align: left;
+}
+.info .day {
+    font-size: 20px;
+    font-weight: bold;
+}
+.info .full-date {
+    font-size: 14px;
+    color: var(--text-dark);
+}
+.weather-info {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.temp {
+    font-size: 50px;
+    font-weight: bold;
+    color: black;
+}
+.weather-icon{
+    width: 40px;
+    height: auto;
+}
+.condition{
+    font-size: 14px;
+    color: var(--text-dark);
+    text-transform: capitalize;
+    text-align: left;
+}
+
+.rainfall-card {
+  grid-area: rain;
+  /*background: rgba(227, 242, 253, 0.8);*/
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
+  flex-direction: column;
+  padding: 15px;
+  gap: 5px;
+  text-align: center;
+  display: flex;
+}
+.rainfall-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-dark);
+    margin: 0;
+    text-align: left;
+}
+.rainfall-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+.rainfall-icon {
+    width: 80px;
+    height: auto;
+    margin-left: 50px;
+}
+.rainfall-value {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    margin: 0;
+    margin-right: 30px;
+    margin-top: 25px;
+}
+.rainfall-value .depth-unit {
+    font-size: 20px;
+    font-weight: normal;
+    margin-left: 2px;
+}
+
+.fog-card {
+  grid-area: fog;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
+  flex-direction: column;
+  padding: 15px;
+  gap: 5px;
+  text-align: center;
+  display: flex;
+}
+.fog-title{
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-dark);
+    margin: 0;
+    text-align: left;
+}
+.fog-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+.fog-icon {
+    width: 80px;
+    height: auto;
+    margin-left: 50px;
+}
+.fog-value {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    margin: 0;
+    margin-right: 30px;
+    margin-top: 25px;
+}
+.fog-value .unit {
+    font-size: 20px;
+    font-weight: normal;
+    margin-left: 2px;
+}
+
+.wind {
+  grid-area: wind;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
+  flex-direction: column;
+  padding: 15px;
+  gap: 0;
+  text-align: center;
+}
+.wind-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-dark);
+  margin: 0;
+  text-align: left;
+}
+.wind-content {
+  position: relative;
+  display: inline-block;
+  width: 200px; 
+  height: 200px;
+  align-items: center;
+}
+.compass {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.compass-circle {
+  width: 140px;
+  height: auto;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin-top: -18px;
+  margin-left: 29px;
+}
+.arrow-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+}
+.compass-arrow {
+  width: 140px;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-7%, -50%) rotate(0deg);
+}
+.wind-speed {
+  color: var(--text-dark); 
+  font-weight: bold;
+  /* margin-left: -70px; */ /* Remove this line */
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+}
+.wind-speed .value {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text-dark);
+}
+.wind-speed .unit {
+    font-size: 10px; 
+}
+
+
+.forecast {
+  grid-area: forecast;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
+  padding: 15px;
+  flex-direction: column; 
+  gap: 15px;
+}
+.forecast-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--text-dark);
+  text-align: left;
+}
+.forecast-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.forecast-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #d6feff;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  min-height: 80px;
+}
+.forecast-card .left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.forecast-card .weather-icon {
+  width: 40px;
+  height: 40px;
+  /*margin-right: 10px */
+  flex-shrink: 0;
+}
+.forecast-card .details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5px;
+  text-align: center;
+}
+.forecast-card .details span:first-child {
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+.forecast-card .details span:last-child {
+  font-size: 12px;
+  color: gray;
+}
+
+.forecast-card .temperature {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--text-dark);
+  text-align: center;
+}
+  
+
+.map {
+  grid-area: map;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
+  height: auto;
+}
+
+.dew-point {
+    grid-area: dewpoint;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    backdrop-filter: blur(20px);
+    padding: 15px;
+    display: flex; 
+    flex-direction: column;
+    gap: 2px;
+    text-align: center; 
+}
+.dew-point-title {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-dark);
+}
+.dew-point-content {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    margin-top: 2px;
+    margin-bottom: 30px;
+}
+.dew-point-icon {
+    width: 50px;
+    height: auto;
+    margin-left: 15px;
+    margin-bottom: 30px;
+}
+.dew-point-value {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-top: 2px;
+    font-size:35px;
+    font-weight: bold;
+    color: black;
+    margin: 0;
+    margin-right: 5px;
+    margin-bottom: 30px;
+}
+
+.humidity {
+  grid-area: humidity;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
+  padding: 15px;
+  display: flex; 
+  flex-direction: column;
+  gap: 2px;
+  text-align: center;
+}
+.humidity-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-dark);
+    margin: 0;
+    margin-top: 60px;
+}
+.humidity-content {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    margin-top: 2px;
+    margin-bottom: 30px;
+}
+.humidity-icon {
+    width: 50px;
+    height: auto;
+    margin-left: 15px;
+    margin-bottom: 30px;
+}
+.humidity-value {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-top: 2px;
+    font-size:35px;
+    font-weight: bold;
+    color: black;
+    margin: 0;
+    margin-right: 5px;
+    margin-bottom: 30px;
+}
+.humidity-value .unit {
+    font-size: 20px;
+    font-weight: normal;
+    margin-left: 2px;
+}
+
+.harvested {
+    grid-area: harvested;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    backdrop-filter: blur(20px);
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    min-height: 250px;
+    height: auto;
+    gap: 25px;
+}
+.harvested-title {
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    text-align: left;;
+}
+.harvested-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+.harvest-icon {
+    width: 100px;
+    height: auto;
+    margin-left: 45px;
+    margin-bottom: 20px;
+}
+.harvested-value {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    font-size: 50px;
+    font-weight: bold;
+    color: black;
+    margin: 0;
+    margin-right: 50px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+.harvested-value .unit {
+    font-size: 30px;
+    font-weight: normal;
+    margin-left: 2px;
+}
+
+.chart {
+    grid-area: chart; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    backdrop-filter: blur(20px);
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    min-height: 250px;
+    height: auto;
+}
+.chart-title {
+    margin-top: 25px;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    text-align: center;
+}
+.bar-chart {
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+/*
+.total-harvest {
+  grid-area: total-harvest;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  min-height: 250px;
+  height: auto;
+}
+.total-harvest-title {
+    margin-top: 0px;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.total-harvest-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.total-harvest-value {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    font-size:35px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 20px;
+}
+.total-harvest-value .unit {
+    font-size: 24px;
+    font-weight: normal;
+    margin-left: 2px;
+}
+*/
+@media (max-width: 768px) {
+    .menu{
+        width: 60px;
+    }
+    .menu-link {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .info {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .temp {
+        font-size: 36px;
+    }
+}
+
+
+
+ /* Modal background overlay (positioned to the left near the bell icon) */
+.modal {
+    display: none; /* Hidden by default */
+    position: absolute; /* Absolute positioning relative to the menu */
+    top: 69%; /* Vertically center it relative to the menu */
+    left: 99px; /* Position it near the bell icon on the left */
+    transform: translateY(-50%); /* Center vertically based on its own height */
+    background-color: rgba(0, 0, 0, 0.5); /* Lighter gray background (lower opacity) */
+    padding: 10px;
+    border-radius: 10px; /* Rounded corners */
+    z-index: 1000; /* Ensure it sits above other content */
+    width: 220px; /* Adjust width to fit the content better */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow around the modal */
+}
+
+/* Modal content box */
+.modal-content {
+    background-color: #fff; /* White background */
+    padding: 15px; /* Reduce padding inside the modal */
+    border-radius: 5px; /* Rounded corners */
+    width: 100%; /* Make the content take up all of the modal width */
+    font-size: 14px; /* Smaller font size for the content */
+    line-height: 1.4; /* Line height to improve readability */
+    color: #333; /* Dark text for better contrast */
+}
+
+/* Close button */
+.close-btn {
+    color: #aaa; /* Light grey color */
+    font-size: 20px; /* Smaller size for the close button */
+    font-weight: bold; /* Bold text for close icon */
+    position: absolute; /* Position it on the top-right corner of the modal */
+    top: 5px;
+    right: 5px;
+    cursor: pointer; /* Change cursor to indicate it's clickable */
+}
+
+/* Change close button color on hover */
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Alert message styles */
+.alert-message {
+    margin-bottom: 10px; /* Space between messages */
+    background-color: #f8d7da; /* Light red background for alerts */
+    color: #721c24; /* Dark red text */
+    padding: 8px;
+    border-radius: 5px; /* Rounded corners */
+    font-size: 14px;
+}
+
+/* Alert for fog */
+.fog-alert {
+    background-color: #d4edda; /* Yellow background for fog alerts */
+    color: #155724; /* Dark yellow text */
+}
+
+/* Alert for rain */
+.rain-alert {
+    background-color: #1E90FF; /* Light green background for rain alerts */
+    color: #ffffff ; /* Dark green text */
+}
+
+/* Alert for no alert */
+.no-alert-message {
+    background-color: #d1ecf1; /* Light blue background */
+    color: #0c5460; /* Dark blue text */
+    padding: 8px;
+    border-radius: 5px; /* Rounded corners */
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    grid-template-areas:
+      "menu"
+      "info"
+      "rain"
+      "fog"
+      "wind"
+      "forecast"
+      "map"
+      "dewpoint"
+      "humidity"
+      "harvested"
+      "chart";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .info, .rainfall-card, .fog-card, .wind, .forecast, .map,
+  .dew-point, .humidity, .harvested, .chart, .menu {
+    height: auto;
+    padding: 10px;
+  }
+
+  .menu {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px 0;
+  }
+
+  .menu .menu-title, .menu .menu-link {
+    font-size: 12px;
+  }
+
+  .temp {
+    font-size: 30px;
+  }
+
+  .forecast-card .temperature {
+    font-size: 16px;
+  }
+
+  .rainfall-icon, .fog-icon, .forecast-card .weather-icon {
+    width: 40px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .dashboard {
+    grid-template-areas:
+      "menu menu menu menu"
+      "info info info info"
+      "rain rain fog fog"
+      "wind wind dewpoint humidity"
+      "map map map map"
+      "forecast forecast forecast forecast"
+      "harvested harvested harvested harvested"
+      "chart chart chart chart";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .menu {
+    grid-area: menu;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 0;
+    gap: 0px;
+  }
+  .menu .logo {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 0;
+  }
+  .menu .menu-title {
+    text-align: left;
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-right: 40pxpx;
+  }
+  .menu .menu-title, .menu {
+    font-size: 20px;
+  }
+  .menu-items {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-left: 190px;
+    margin-right: 0px;
+    gap: 30px;
+  }
+  .menu-bottom {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-right: 20px;
+  }
+
+  .menu .menu-link {
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    font-size: 30px;
+  }
+  .info {
+    padding: 28px;
+  }
+  .temp {
+    font-size: 40px;
+  }
+
+  .forecast-card {
+    padding: 15px;
+  }
+  .forecast-card .temperature {
+    font-size: 18px;
+  }
+
+  .harvested {
+    grid-area: harvested;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    backdrop-filter: blur(20px);
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    min-height: 250px;
+    height: auto;
+  }
+  .dew-point {
+    grid-area: dewpoint;
+  }
+
+  .dew-point-title {
+    margin-top: 70px
+  }
+  .wind-content {
+    position: relative;
+    align-items: center;
+  }
+  .wind-content .compass-circle {
+    position: absolute;
+    width: 250px;
+    height: auto;
+    left: 0;
+    top: 0;
+  }
+  .arrow-container{
+    position: absolute;
+  }
+  .wind-content .compass-arrow {
+    position: absolute;
+    width: 250px;
+    height: auto;
+    left: 155px;
+    top: 108px;
+  }
+  .wind-speed {
+    color: var(--text-dark);
+    font-weight: bold;
+    /* margin-left: -70px; / / Remove this line */
+    position: absolute;
+    top: 89px;
+    left: 118px;
+    right: 0;
+    transform: none
+  }
+  .wind-speed .value {
+    font-size: 25px;
+    font-weight: bold;
+    color: var(--text-dark);
+  }
+  .wind-speed .unit {
+    font-size: 21px;
+  }
+
+  .rainfall-icon, .fog-icon, .forecast-card .weather-icon {
+    width: 50px;
+  }
+}
+
+.graphs-container {
+    grid-area: chart;
+    overflow-y: auto;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.graph {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.menu {
+  grid-area: menu;
+  width: 80px;
+  height: auto;
+  /*background: rgba(227, 242, 253, 0.8);*/
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+}

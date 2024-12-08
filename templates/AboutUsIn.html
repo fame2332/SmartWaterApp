@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="icon" href="{{ url_for('static', filename='Images/LOGO.png') }}" type="image/x-icon">
+    <title>SmartWater | About Us</title>
+    <meta charset="utf-8">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-aboutus.css') }}">
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+            <a href="index.html" class="logo"><img src="{{ url_for('static', filename='Images/LOGO.png') }}" alt="Smart Water Logo" class="logo-img">SmartWater</a>
+            <nav id="nav">
+                <a href="/index">Dashboard</a>
+
+            </nav>
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <div class="col-col-1">
+        <section class="banner">
+            <div class="banner-content"> <!-- New container for styling -->
+                <h1>About SmartWater</h1>
+                <p class="P-Descrip">SmartWater was developed by three innovative students from De La Salle University-Dasmariñas, driven by a shared passion for sustainability and community impact. This project aims to optimize the collection of rainwater and fog, offering a practical solution to water scarcity in Bacoor, Cavite. Inspired by the growing challenges posed by rapid urbanization in the area, SmartWater is designed to address the increasing demand for sustainable water sources. The system combines advanced technology with environmental responsibility, ensuring an efficient and eco-friendly approach to water management. Through SmartWater, The founders strive to empower Bacoor residents with a reliable alternative to combat water scarcity and build a more sustainable future.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- One -->
+    <div class=""> <!--starting div for transition-->
+    <div class="col-col-2">
+        <section id="one" class="wrapper">
+            <div class="inner-1">
+                <div class="flex flex-3">
+                    <article class="purpose-banner">
+                        <header>
+                            <h3>Purpose</h3>
+                        </header>
+                        <p>SmartWater aims to address the pressing issue of water scarcity in Bacoor, Cavite, by harnessing the natural resources of rainwater and fog. Through an innovative and sustainable water collection system, it provides an eco-friendly solution to the growing demand for water in rapidly urbanizing areas.</p>
+                        <header>
+                            <h3>Goal</h3>
+                        </header>
+                        <p>The goal of SmartWater is to empower the community by offering a reliable and sustainable water source, reducing dependency on traditional water supply systems. By integrating advanced technology with environmental consciousness, the project seeks to promote long-term water conservation and contribute to a more resilient and self-sufficient Bacoor.</p>
+                    </article>
+                    <article class="feature-banner">
+                        <header>
+                            <h3>Features of the App</h3>
+                        </header>
+                        <h4>Weather Overview: </h4>
+                        <p>Displays current weather and forecast (temperature, humidity, fog intensity, rainfall).</p>
+                        <h4>Water Collection Dashboard: </h4>
+                        <p>Shows real-time data on potential water collection rates.</p>
+                        <h4>Detailed View: </h4>
+                        <p>Displays weather variables (humidity, temperature, wind speed) with specific water collection estimates.</p>
+                        <h4>Topographical Insights:  </h4>
+                        <p>A map showing the best spots for water collection based on terrain features.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Meet The Team -->
+    <section id="two" class="wrapper style1 special">
+        <div class="inner-1">
+            <header class="team-banner">
+                <h2>Meet The Team</h2>
+                <p>Who Transformed Challenges into Sustainable Solutions.</p>
+            </header>
+            <div class="flex flex-4">
+                <div class="box person">
+                    <div class="image round">
+                        <img src="{{ url_for('static', filename='Images/Aries.jpg') }}" alt="Person 1" width="168" height="168">
+                    </div>
+                    <h3>Aries Ivan Garibay</h3>
+                    <p class="Programmer">Programmer</p>
+                </div>
+                <div class="box person">
+                    <div class="image round">
+                        <img src="{{ url_for('static', filename='Images/Ayen.jpg') }}" alt="Person 2" width="168" height="168">
+                    </div>
+                    <h3>Lauren Miracle Sotong</h3>
+                    <p class="Programmer">Programmer</p>
+                </div>
+                <div class="box person">
+                    <div class="image round">
+                        <img src="{{ url_for('static', filename='Images/Rich.jpg') }}" alt="Person 3" width="168" height="168">
+                    </div>
+                    <h3>Richmond Constante</h3>
+                    <p class="Programmer">Programmer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class= "footer">
+        <div class="waves">
+            <div class="wave" id="wave-1"></div>
+            <div class="wave" id="wave-2"></div>
+            <div class="wave" id="wave-3"></div>
+            <div class="wave" id="wave-4"></div>
+        </div>
+        <div class="footer-content">
+            <div class="logo-heading">
+                <img src="{{ url_for('static', filename='Images/LOGO.png') }}" alt="Smart-Logo">
+                <h2>SmartWater</h2>
+            </div>
+            <p>Smart Water is a capstone project developed as part of the Computer Science program, integrating machine learning and environmental sustainability to optimize fog and rainwater harvesting in Bacoor, Cavite.</p>
+        </div>
+        <div class="footer-content">
+            <h4>Contact Us</h4>
+            <li>rc202300000@gmail.com</li>
+            <li>GAM1029@dlsud.edu.ph</li>
+            <li>sotong.miracle@gmail.com</li>
+        </div>
+        <div class="footer-content">
+            <h4>Follow Us</h4>
+            <li><a href="https://github.com/fame2332">Richmond Constante</a></li>
+            <li><a href="https://github.com/ARANNNFPS">Aries Garibay</a></li>
+            <li><a href="https://github.com/AeinSo">Lauren Sotong</a></li>
+        </div>
+        <div class="footer-content">
+            <h4>Legal Information</h4>
+            <li><a href="/privacy_policy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+        </div>
+        <div class="footer-content">
+            <h4>Credits</h4>
+            <li><a href="https://openweathermap.org/api"><i>API by Open Weather Map</i></a></li>
+            <li><a href="https://www.visualcrossing.com/weather/weather-data-services"><i>Weather Data powered by Visual Crossing</i></a></li>
+            <li><a href="https://www.philatlas.com/luzon/r04a/cavite/bacoor.html"><i>Topographical Data provided by PhilAtlas</i></a></li>
+        </div>
+    </section>
+</div> <!--ending div for the transition-->
+</body>
+</html>

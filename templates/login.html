@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='Images/LOGO.png') }}" type="image/x-icon">
+    <title>SmartWater | Log In & Register</title>
+    <!-- BOXICONS -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!-- STYLE -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-login.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <div class="col-col-1">
+            <div class="image-layer">
+                <img src="{{ url_for('static', filename='Images/SHADOW.png') }}" class="form-image-main">
+                <img src="{{ url_for('static', filename='Images/BIGDOT.png') }}" class="form-image BIGDOT">
+                <img src="{{ url_for('static', filename='Images/RAINDROP.png') }}" class="form-image RAINDROP">
+                <img src="{{ url_for('static', filename='Images/BOTDOT.png') }}" class="form-image BOTDOT">
+                <img src="{{ url_for('static', filename='Images/DOTTEDSQUARE.png') }}" class="form-image DOTTEDSQUARE">
+                <img src="{{ url_for('static', filename='Images/TWODOTS.png') }}" class="form-image TWODOTS">
+            </div>
+            <p class="featured-words">Enter your details to get started with <span style="color: #00022e;">SmartWater</span></p>
+        </div>
+        <div class="col-col-2">
+            <div class="btn-box">
+                <button class="btn btn-1" id="login">Sign In</button>
+                <button class="btn btn-2" id="register">Sign Up</button>
+            </div>
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <!-- Login Form Container -->
+            <form action="{{ url_for('login') }}" method="POST">
+                <div class="login-form">
+                    <div class="form-title">
+                        <span>Sign In</span>
+                    </div>
+                    <div class="form-inputs">
+                        <div class="input-box">
+                            <input type="text" class="input-field" name="login_username" placeholder="Username" required>
+                            <i class="bx bx-user icon"></i>
+                        </div>
+                        <div class="input-box">
+                            <input type="password" class="input-field" name="login_password" placeholder="Password" required>
+                            <i class="bx bx-lock-alt icon"></i>
+                        </div>
+                        <div class="input-box">
+                            <button class="input-submit" type="submit" name="login" value="login">
+                                <span>Sign In</span>
+                                <i class="bx bx-right-arrow-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Register Form Container -->
+            <form action="{{ url_for('login') }}" method="POST">
+                <div class="register-form">
+                    <div class="form-title">
+                        <span>Create Account</span>
+                    </div>
+                    <div class="form-inputs">
+                        <div class="input-box">
+                            <input type="email" class="input-field" name="email" placeholder="E-mail" required>
+                            <i class="bx bx-envelope icon"></i>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" class="input-field" name="username" placeholder="Username" required>
+                            <i class="bx bx-user icon"></i>
+                        </div>
+                        <div class="input-box">
+                            <input type="password" class="input-field" name="password" placeholder="Password" required>
+                            <i class="bx bx-lock-alt icon"></i>
+                        </div>
+                        <div class="forgot-password">
+                            <a href="{{ url_for('terms') }}">Terms and Service</a>
+                        </div>
+                        <div class="input-box">
+                            <button class="input-submit" type="submit" name="register" value="register">
+                                <span>Sign Up</span>
+                                <i class="bx bx-right-arrow-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
