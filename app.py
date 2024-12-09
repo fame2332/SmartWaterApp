@@ -217,7 +217,7 @@ def table_data():
 
 @app.route('/download_csv', methods=['GET'])
 def download_csv():
-    API_KEY = "NJEU4MUZCARCCSTS7SV8HL6VE"
+    API_KEY = "NJEU4MUZCARCCSTS7SV8HL6VE"  #J65MJNRTAY8KQ97SQDY9UZQK7
     BASE_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline"
     LOCATION = "Bacoor, Cavite, Philippines"
     CSV_FILE = "weather_data.csv"
