@@ -393,12 +393,12 @@ body {
   transform: translate(-50%, -60%);
 }
 .wind-speed .value {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
     color: var(--text-dark);
 }
 .wind-speed .unit {
-    font-size: 10px; 
+    font-size: 8px; 
 }
 
 
